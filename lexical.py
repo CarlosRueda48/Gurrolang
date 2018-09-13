@@ -126,16 +126,45 @@ def lexicalAnalysis(path):
             # still must be fixed properly, however this (not tokenName == "INITIAL") is a temporary fix
             # that makes the lexical analyzer work as intended
             if(tokenEnded and (not tokenName == "INITIAL")):
+                #Palabras reservadas
+                if(tokenName == "IDENTIFIER"):
+                    if(tokenValue == "principal"):
+                        newToken = token.Token("KEYWORD_PRINCIPAL", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "regresa"):
+                        newToken = token.Token("KEYWORD_REGRESA", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "si"):
+                        newToken = token.Token("KEYWORD_SI", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "mientras"):
+                        newToken = token.Token("KEYWORD_MIENTRAS", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "verdadero"):
+                        newToken = token.Token("KEYWORD_VERDADERO", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "falso"):
+                        newToken = token.Token("KEYWORD_FALSO", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    else:
+                        newToken = token.Token(tokenName, tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    
                 #print("Adding new valid token!")
-                newToken = token.Token(tokenName, tokenValue, lineNum, charNum)
-                tokens.append(newToken)
                 # If the read character was not a whitespace or similar, it must still be processed,
                 # by the automata at the 
                 if(not isSpace(fileText[index])):
                     #print("Decreasing index due to non-whitespace char read")
                     index -= 1
                 tokenEnded = False
-                print(newToken)
+                
         charNum += 1
         index += 1
     
