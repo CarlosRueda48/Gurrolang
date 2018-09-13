@@ -27,14 +27,14 @@ falso
 No Terminales:
 inicio
 principal
-bloque_de_funciones
+bloque_funciones
 sentencias
 sentencia
 funcion
 tipo_de_dato
 argumentos
 argumento
-bloque_de_codigo
+bloque_codigo
 declaraciones
 si
 mientras
@@ -59,7 +59,7 @@ Producciones:
 
 <principal> ::= principal '(' ')' '{' [<declaraciones>]* [<sentencias>] '}' 
 
-<bloque_de_funciones> ::= <funcion> <bloque_de_funciones>
+<bloque_funciones> ::= <funcion> <bloque_de_funciones>
 
 <sentencias> ::= <sentencia> [<sentencias>]
 
@@ -73,7 +73,7 @@ Producciones:
 
 <argumento> ::= <tipo_de_dato> IDENTIFICADOR
 
-<bloque_de_codigo> ::= [<declaraciones>]* [<sentencias>]*
+<bloque_codigo> ::= [<declaraciones>]* [<sentencias>]*
 
 <declaraciones> ::= <tipo_de_dato> IDENTIFICADOR ';'
 

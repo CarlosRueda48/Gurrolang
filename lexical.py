@@ -97,6 +97,7 @@ def lexicalAnalysis(path):
     print("File buffer length:", length)
     index = 0
     tokens = []
+    symbolTable = []
     lineNum = 1
     charNum = 1
     savedToken = ""
@@ -152,9 +153,22 @@ def lexicalAnalysis(path):
                         newToken = token.Token("KEYWORD_FALSO", tokenValue, lineNum, charNum)
                         tokens.append(newToken)
                         print(newToken)
+                    elif(tokenValue == "entero"):
+                        newToken = token.Token("KEYWORD_ENTERO", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "real"):
+                        newToken = token.Token("KEYWORD_REAL", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
+                    elif(tokenValue == "logico"):
+                        newToken = token.Token("KEYWORD_LOGICO", tokenValue, lineNum, charNum)
+                        tokens.append(newToken)
+                        print(newToken)
                     else:
                         newToken = token.Token(tokenName, tokenValue, lineNum, charNum)
                         tokens.append(newToken)
+                        symbolTable.append(newToken)
                         print(newToken)
                     
                 #print("Adding new valid token!")
@@ -167,14 +181,25 @@ def lexicalAnalysis(path):
                 
         charNum += 1
         index += 1
-    
-    return tokens
 
-lex = lexicalAnalysis("source.txt")
+    with open("tokens.txt","w") as tokenFile:
+        # Since the comma is an accepted token in our language, token values are separated by whitespaces
+        # Each line of tokens.txt consists of tokenType, tokenValue, lineNumber, charNumber
+        for t in tokens:
+            tokenFile.write(t.__repr__() + "\n")
+            print(t)
+        tokenFile.close()
 
-tokenFile = open("tokens.txt","w")
-# Since the comma is an accepted token in our language, token values are separated by whitespaces
-# Each line of tokens.txt consists of tokenType, tokenValue, lineNumber, charNumber
-for t in lex:
-    tokenFile.write(t.__repr__() + "\n")
-    print(t)
+    with open("symbolTable.txt","w") as symbolTableFile:
+        # Since the comma is an accepted token in our language, token values are separated by whitespaces
+        # Each line of tokens.txt consists of tokenType, tokenValue, lineNumber, charNumber
+        for s in symbolTable:
+            symbolTableFile.write(s.__repr__() + "\n")
+            print(s)
+        symbolTableFile.close()
+
+    return tokens, symbolTable
+
+tokens, symbolTable = lexicalAnalysis("source.txt")
+
+
